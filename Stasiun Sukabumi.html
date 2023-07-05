@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SIG</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+#map {
+height: 500px;
+}
+.leaflet-popup-content {
+/* font-size: 20px;
+color: aqua; */
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+</body>
+<script>
+// Define the custom icon
+var customIcon = L.icon({
+iconUrl: 'https://upload.wikimedia.org/wikipedia/id/2/27/KRL_CL_icon.svg',
+iconSize: [38, 38],
+iconAnchor: [19, 19],
+popupAnchor: [0, -10],
+});
+// Map Sukabumi
+var map = L.map('map').setView([-6.9218, 106.9265], 14);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+maxZoom: 19,
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+// Define an array of marker locations
+var markerLocations = [
+{ latitude: -6.790260200872811, longitude: 106.77960857718297, marker: '<b>Stasiun Cicurug</b></br>Cicurug, Kec. Cicurug, Kabupaten Sukabumi, Jawa Barat 43359' },
+{ latitude: -6.843546950653273, longitude: 106.7603926200231, marker: '<b>Stasiun Parungkuda</b></br>Parungkuda, Kec. Parungkuda, Kabupaten Sukabumi, Jawa Barat 43357' },
+{ latitude: -6.885217298861212, longitude: 106.78064866234651, marker: '<b>Stasiun Cibadak</b></br>Cibadak, Kec. Cibadak, Kabupaten Sukabumi, Jawa Barat 43351' },
+{ latitude: -6.896411422822759, longitude: 106.82245995691684, marker: '<b>Stasiun Karang Tengah</b></br>4R3C+FX4, Karangtengah, Jl. Raya Sukabumi, Ciheulang Tonggoh, Kec. Cibadak, Kabupaten Sukabumi, Jawa Barat 40134' },
+{ latitude: -6.913965681246334, longitude:  106.88746141735355, marker: '<b>Stasiun Cisaat<b></br>3VPP+CX8, Jl. Ciraden, Cisaat, Kec. Cisaat, Kabupaten Sukabumi, Jawa Barat 43152' },
+{ latitude: -6.9248845862550175, longitude: 106.92962755316627, marker: '<b>Stasiun Sukabumi<b></br>Gunungparang, Kec. Cikole, Kota Sukabumi, Jawa Barat 43141' },
+{ latitude: -6.936310440155986,longitude:  106.99486254644974, marker: '<b>Stasiun Gandasoli</b></br>Cipurut, Kec. Cireunghas, Kabupaten Sukabumi, Jawa Barat 43193' },
+{ latitude: -6.95857434427779, longitude:  107.03713173615736, marker: '<b>Stasiun Cireunghas</b></br>Bencoy, Kec. Cireunghas, Kabupaten Sukabumi, Jawa Barat 43193' },
+];
+// Loop over the markerLocations array and create a marker for each location
+for (var i = 0; i < markerLocations.length; i++) {
+var marker = L.marker([markerLocations[i].latitude, markerLocations[i].longitude, markerLocations[i].marker], { icon: customIcon }).addTo(map);
+marker.bindPopup(markerLocations[i].marker);
+}
+</script>
+</html>
